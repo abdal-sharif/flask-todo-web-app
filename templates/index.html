@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
+    <title>Todo List Flask Web App</title>
     <style>
         body {
             background-color: #f8f9fa;
@@ -48,7 +48,6 @@
             padding: 10px;
             border-radius: 4px;
             cursor: pointer;
-            width: 10vw;
         }
         button:hover {
             background-color: #333;
@@ -71,24 +70,28 @@
 <body>
     <div class="container">
         <h4>Todo List Flask Web App</h4>
-        <form action="" method="POST">
-            <label for="add">Add Task</label>
-            <input type="text" name="task" id="add" required>
+        <form action="/add" method="POST">
+            <label for="task">Add Task</label>
+            <input type="text" name="task" id="task" required>
             <button type="submit">Add</button>
         </form>
-        
         <table>
             <thead>
                 <tr>
                     <th>Tasks</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Example row, replace with dynamic content -->
+                {% for task in tasks %}
                 <tr>
-                    <td>Sample Task</td>
+                    <td>{{ task.title }}</td>
+                    <td>
+                        <a href="/update/{{ task.id }}">Complete</a>
+                        <a href="/delete/{{ task.id }}">Delete</a>
+                    </td>
                 </tr>
-                <!-- Add more rows as needed -->
+                {% endfor %}
             </tbody>
         </table>
     </div>
